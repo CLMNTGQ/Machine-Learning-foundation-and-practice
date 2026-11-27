@@ -1,5 +1,7 @@
 # Machine Learning: Foundations and Practice
 
+**[Read the course online](https://clmntgq.github.io/Machine-Learning-foundation-and-practice/course/)**
+
 **[Open the presentation in your browser](https://clmntgq.github.io/Machine-Learning-foundation-and-practice/machine-learning.html)**
 
 A hands-on introduction to machine learning for engineering students. Start by framing a problem and preparing data, then train, compare, and evaluate models on examples such as Titanic survival and California housing prices.

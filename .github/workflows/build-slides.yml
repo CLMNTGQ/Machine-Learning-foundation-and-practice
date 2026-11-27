@@ -1,4 +1,4 @@
-name: Build and publish Marp slides
+name: Build and publish course
 
 on:
   push:
@@ -7,6 +7,12 @@ on:
       - 'machine-learning-slides.md'
       - 'deftech3.css'
       - 'images/**'
+      - 'machine-learning-course.md'
+      - 'astro.config.mjs'
+      - 'package.json'
+      - 'package-lock.json'
+      - 'scripts/prepare-course.mjs'
+      - 'src/**'
       - '.github/workflows/build-slides.yml'
   workflow_dispatch:
 
@@ -45,14 +51,17 @@ jobs:
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git commit -m 'Regenerate Marp slides'
           git push origin HEAD:main
+      - name: Build the Astro Starlight course site
+        run: |
+          npm ci
+          npm run build
       - name: Stage presentation and images
         run: |
-          mkdir -p _site
-          cp machine-learning.html _site/
-          cp -R images _site/images
+          cp machine-learning.html dist/
+          cp -R images dist/images
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: _site
+          path: dist
 
   deploy:
     needs: build
@@ -65,6 +74,6 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - name: Deploy presentation to GitHub Pages
+      - name: Deploy course to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
