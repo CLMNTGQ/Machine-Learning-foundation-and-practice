@@ -1,4 +1,4 @@
-name: Build Marp slides
+name: Build and publish Marp slides
 
 on:
   push:
@@ -6,6 +6,7 @@ on:
     paths:
       - 'machine-learning-slides.md'
       - 'deftech3.css'
+      - 'images/**'
       - '.github/workflows/build-slides.yml'
   workflow_dispatch:
 
@@ -44,3 +45,26 @@ jobs:
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git commit -m 'Regenerate Marp slides'
           git push origin HEAD:main
+      - name: Stage presentation and images
+        run: |
+          mkdir -p _site
+          cp machine-learning.html _site/
+          cp -R images _site/images
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy presentation to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
