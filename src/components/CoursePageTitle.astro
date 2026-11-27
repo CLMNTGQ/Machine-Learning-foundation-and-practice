@@ -1,0 +1,29 @@
+---
+import { Image } from 'astro:assets';
+import Default from '@astrojs/starlight/components/PageTitle.astro';
+import banner from '../../images/banners/machine-learning.webp';
+
+const { slug } = Astro.locals.starlightRoute;
+---
+
+<Default />
+{slug === 'course' && (
+  <Image
+    class="course-banner"
+    src={banner}
+    alt="An optical sensor and test monitors in a workshop overlooking a rainy harbor."
+    widths={[480, 900, 1400, banner.width]}
+    sizes="(max-width: 50rem) 100vw, 58rem"
+    loading="eager"
+    fetchpriority="high"
+  />
+)}
+
+<style>
+  .course-banner {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin-block-start: 1rem;
+  }
+</style>

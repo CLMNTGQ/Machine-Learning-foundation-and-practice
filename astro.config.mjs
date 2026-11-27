@@ -23,7 +23,10 @@ export default defineConfig({
         '@fontsource/ibm-plex-mono/latin-400.css',
         './src/styles/deftech-starlight.css',
       ],
-      components: { Footer: './src/components/DeftechFooter.astro' },
+      components: {
+        Footer: './src/components/DeftechFooter.astro',
+        PageTitle: './src/components/CoursePageTitle.astro',
+      },
       social: [
         { icon: 'github', label: 'GitHub', href: 'https://github.com/CLMNTGQ/Machine-Learning-foundation-and-practice' },
       ],
