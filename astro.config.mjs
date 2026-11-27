@@ -15,7 +15,15 @@ export default defineConfig({
     mermaid({ theme: 'forest', autoTheme: true, enableLog: false }),
     starlight({
       title: "Machine Learning: Foundations and Practice",
-      customCss: ['katex/dist/katex.min.css'],
+      customCss: [
+        'katex/dist/katex.min.css',
+        '@fontsource/inter/latin-400.css',
+        '@fontsource/inter/latin-600.css',
+        '@fontsource/inter/latin-700.css',
+        '@fontsource/ibm-plex-mono/latin-400.css',
+        './src/styles/deftech-starlight.css',
+      ],
+      components: { Footer: './src/components/DeftechFooter.astro' },
       social: [
         { icon: 'github', label: 'GitHub', href: 'https://github.com/CLMNTGQ/Machine-Learning-foundation-and-practice' },
       ],

@@ -1,0 +1,12 @@
+---
+import Default from '@astrojs/starlight/components/Footer.astro';
+
+const { siteTitle } = Astro.locals.starlightRoute;
+---
+
+<Default><slot /></Default>
+<div class="deftech-footer">
+  <span>{siteTitle}</span>
+  <span class="deftech-coordinates">43.1240° N · 5.9280° E</span>
+  <span>Clément Gicquel</span>
+</div>
